@@ -28,9 +28,14 @@ numberOfOcc s t = length [x | x <- t, x == s]
 -- Aufgabe 5
 mostCommonSymbol :: Text -> Symbol
 mostCommonSymbol [] = error "kein Resultat"
-mostCommonSymbol t = if snd (sortedByMax t !! 0) > snd (sortedByMax t !! 1)
-                     then fst (sortedByMax t !! 0)
-                     else error "kein Resultat"
+mostCommonSymbol t
+	| countOfFirstSymbol > countOfSecondSymbol = mostCommonSymb 
+	| otherwise = error "kein Resultat"
+		where 
+		  symbols = sortedByMax t
+		  countOfFirstSymbol = snd (symbols !! 0)
+		  countOfSecondSymbol = snd (symbols !! 1)
+		  mostCommonSymb = fst (symbols !! 0)
 
 sortedByMax :: Text -> [(Symbol, NumberOf)]
 sortedByMax t = reverse . nub . sortedByOcc . countedSymbols $ t
