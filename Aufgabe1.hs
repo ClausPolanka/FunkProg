@@ -1,3 +1,6 @@
+import Data.Function
+import Data.List
+
 -- Aufgabe 1
 pick :: Integer -> [Integer] -> [Integer]
 pick n l = [x | x <- l, x == n]
@@ -12,6 +15,28 @@ pickAll l1 (x:xs) = (pick x l1) ++ pickAll l1 xs
 variations :: Integer -> Integer -> Integer
 variations n r
 	| n < r || r < 0 = -1
-	| otherwise = product (take (fromIntegral r) [n, n-1..0])
+	| otherwise = product . take (fromIntegral r) $ [n, n-1..0]
 
 -- Aufgabe 4
+type Symbol = Char
+type Text = String
+type NumberOf = Int
+
+numberOfOcc :: Symbol -> Text -> NumberOf
+numberOfOcc s t = length [x | x <- t, x == s]
+
+-- Aufgabe 5
+mostCommonSymbol :: Text -> Symbol
+mostCommonSymbol [] = error "kein Resultat"
+mostCommonSymbol t = if snd (sortedByMax t !! 0) > snd (sortedByMax t !! 1)
+                     then fst (sortedByMax t !! 0)
+                     else error "kein Resultat"
+
+sortedByMax :: Text -> [(Symbol, NumberOf)]
+sortedByMax t = reverse . nub . sortedByOcc . countedSymbols $ t
+
+countedSymbols :: Text -> [(Symbol, NumberOf)]
+countedSymbols t = [(x, (numberOfOcc x t)) | x <- t]
+
+sortedByOcc :: [(Symbol, NumberOf)] -> [(Symbol, NumberOf)]
+sortedByOcc symbols = sortBy (\ x y -> compare (snd x) (snd y)) symbols
