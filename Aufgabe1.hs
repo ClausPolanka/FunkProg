@@ -14,8 +14,8 @@ pickAll l1 (x:xs) = (pick x l1) ++ pickAll l1 xs
 -- Aufgabe 3
 variations :: Integer -> Integer -> Integer
 variations n r
-	| n < r || r < 0 = -1
-	| otherwise = product . take (fromIntegral r) $ [n, n-1..0]
+    | n < r || r < 0 = -1
+    | otherwise = product . take (fromIntegral r) $ [n, n-1..0]
 
 -- Aufgabe 4
 type Symbol = Char
@@ -29,13 +29,13 @@ numberOfOcc s t = length [x | x <- t, x == s]
 mostCommonSymbol :: Text -> Symbol
 mostCommonSymbol [] = error "kein Resultat"
 mostCommonSymbol t
-	| countOfFirstSymbol > countOfSecondSymbol = mostCommonSymb 
-	| otherwise = error "kein Resultat"
-		where 
-		  symbols = sortedByMax t
-		  countOfFirstSymbol = snd (symbols !! 0)
-		  countOfSecondSymbol = snd (symbols !! 1)
-		  mostCommonSymb = fst (symbols !! 0)
+    | countOfFirstSymbol > countOfSecondSymbol = mostCommonSymb 
+    | otherwise = error "kein Resultat"
+        where 
+          symbols = sortedByMax t
+          countOfFirstSymbol = snd (symbols !! 0)
+          countOfSecondSymbol = snd (symbols !! 1)
+          mostCommonSymb = fst (symbols !! 0)
 
 sortedByMax :: Text -> [(Symbol, NumberOf)]
 sortedByMax t = reverse . nub . sortedByOcc . countedSymbols $ t
