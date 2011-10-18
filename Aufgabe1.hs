@@ -1,4 +1,3 @@
-import Data.Function
 import Data.List
 
 -- Aufgabe 1
