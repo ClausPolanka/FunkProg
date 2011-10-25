@@ -1,17 +1,16 @@
 -- Beispiel 1
 istPrimal :: Integer -> Bool
-istPrimal n = True --foo (p n) n
+istPrimal n = hasNoFactors n (pFor n)
+    where 
+        pFor n = [1 + x * 4 | x <- [1..n]]
+        hasNoFactors n p =  notElem (calcFactorFor (last p) p) p
+        calcFactorFor _ [] = -1
+        calcFactorFor lastInP (x:xs)
+            | mod lastInP x == 0 = div lastInP x
+            | otherwise = calcFactorFor lastInP xs
 
-p n = [ x | x <- [1..(1 + 4 * n)] ]
 
-foo [] _ = False
-foo (x:xs) n
-    | elem (test n x) (p n) = True
-    | otherwise = foo xs n
-
-test n x
-    | (mod ((1 + 4 * n) / x) == 0) = (1 + 4 * n) / x
-    | otherwise = -1
+foo n = [1 + x * 4 | x <- [1..n]]
 
 -- Beispiel 2
 faktorisiere :: Integer -> [(Integer,Integer)]
