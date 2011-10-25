@@ -5,10 +5,10 @@ istPrimal n
     | otherwise = hasNoFactors n p
         where 
             p = [1 + x * 4 | x <- [1..n]]
-            hasNoFactors n p =  notElem (secondFactorForLastIn p) p
+            hasNoFactors n p = (secondFactorForLastIn p) `notElem` p
             secondFactorForLastIn [] = -1
             secondFactorForLastIn p@(x:xs)
-                | mod (last p) x == 0 = div (last p) x
+                | (last p) `mod` x == 0 = (last p) `div` x
                 | otherwise = secondFactorForLastIn xs
 
 -- Beispiel 2
