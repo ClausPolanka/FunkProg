@@ -11,9 +11,6 @@ istPrimal n
                 | mod lastInP x == 0 = div lastInP x
                 | otherwise = factorFor lastInP xs
 
-
-foo n = [1 + x * 4 | x <- [1..n]]
-
 -- Beispiel 2
 faktorisiere :: Integer -> [(Integer,Integer)]
 faktorisiere x
