@@ -1,10 +1,10 @@
 -- Beispiel 1
 istPrimal :: Integer -> Bool
 istPrimal n
-    | notElem n (pFor n) = False
-    | otherwise = hasNoFactors n (pFor n)
+    | notElem n p = False
+    | otherwise = hasNoFactors n p
         where 
-            pFor n = [1 + x * 4 | x <- [1..n]]
+            p = [1 + x * 4 | x <- [1..n]]
             hasNoFactors n p =  notElem (factorForLastIn p) p
             factorForLastIn [] = -1
             factorForLastIn p@(x:xs)
