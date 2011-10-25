@@ -5,11 +5,11 @@ istPrimal n
     | otherwise = hasNoFactors n p
         where 
             p = [1 + x * 4 | x <- [1..n]]
-            hasNoFactors n p =  notElem (factorForLastIn p) p
-            factorForLastIn [] = -1
-            factorForLastIn p@(x:xs)
+            hasNoFactors n p =  notElem (secondFactorForLastIn p) p
+            secondFactorForLastIn [] = -1
+            secondFactorForLastIn p@(x:xs)
                 | mod (last p) x == 0 = div (last p) x
-                | otherwise = factorForLastIn xs
+                | otherwise = secondFactorForLastIn xs
 
 -- Beispiel 2
 faktorisiere :: Integer -> [(Integer,Integer)]
