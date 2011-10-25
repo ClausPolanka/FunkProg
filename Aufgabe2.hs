@@ -1,13 +1,15 @@
 -- Beispiel 1
 istPrimal :: Integer -> Bool
-istPrimal n = hasNoFactors n (pFor n)
-    where 
-        pFor n = [1 + x * 4 | x <- [1..n]]
-        hasNoFactors n p =  notElem (calcFactorFor (last p) p) p
-        calcFactorFor _ [] = -1
-        calcFactorFor lastInP (x:xs)
-            | mod lastInP x == 0 = div lastInP x
-            | otherwise = calcFactorFor lastInP xs
+istPrimal n
+    | notElem n (pFor n) = False
+    | otherwise = hasNoFactors n (pFor n)
+        where 
+            pFor n = [1 + x * 4 | x <- [1..n]]
+            hasNoFactors n p =  notElem (factorFor (last p) p) p
+            factorFor _ [] = -1
+            factorFor lastInP (x:xs)
+                | mod lastInP x == 0 = div lastInP x
+                | otherwise = factorFor lastInP xs
 
 
 foo n = [1 + x * 4 | x <- [1..n]]
