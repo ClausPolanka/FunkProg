@@ -15,6 +15,15 @@ threeComponentListsWithOneElement =
 threeComponentLists_1Has1Element_1Has2Elements_1Has3Elements = 
     TestCase (assertEqual "Matrix" [[5, 0, 0], [4, 2, 0], [1, 3, 7]] (anp1 [[5], [4, 2], [1, 3, 7]]))
 
+funkProgAcceptanceTest1 = 
+    TestCase (assertEqual "Matrix" [[1, 2, 3, 0, 0], 
+                                    [1, 2, 0, 0, 0], 
+                                    [1, 2, 3, 4, 5], 
+                                    [1, 0, 0, 0, 0]] (anp1 [[1, 2, 3], [1, 2], [1, 2, 3, 4, 5], [1]]))
+
+funkProgAcceptanceTest2 = 
+    TestCase (assertEqual "Matrix" [[1,2,3],[4,5,6]] (anp1 [[1,2,3],[4,5,6]]))
+
 allTests = 
     TestList [
         TestLabel 
@@ -31,7 +40,15 @@ allTests =
 
         TestLabel
         "For 3 component lists 1 has 1, 1 has 2 and 1 has 3 elements add necessary 0s to all lists."
-        threeComponentLists_1Has1Element_1Has2Elements_1Has3Elements
+        threeComponentLists_1Has1Element_1Has2Elements_1Has3Elements,
+
+        TestLabel
+        "FunkProg Acceptance Test 1"
+        funkProgAcceptanceTest1,
+
+        TestLabel
+        "FunkProg Acceptance Test 2"
+        funkProgAcceptanceTest2
     ]
 
 main = do runTestTT allTests
