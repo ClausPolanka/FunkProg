@@ -33,4 +33,9 @@ anp2 l z s w
 
 -- Beispiel 3
 transp :: [[Integer]] -> Zeilen -> Spalten -> Fuellwert -> Matrix
-transp l z s w = anp2 l s z w
+transp l z s w
+    | l == [] = anp2 l s z w
+    | otherwise = anp2 (buildTransponierteMatrixWithIndex 0) s z w
+        where buildTransponierteMatrixWithIndex i
+                | i < (fromIntegral z) = [x !! i | x <- (anp2 l z s w)] : buildTransponierteMatrixWithIndex (i + 1)
+                | otherwise = []
