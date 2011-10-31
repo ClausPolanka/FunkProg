@@ -17,9 +17,15 @@ anp2 _ 0 _ _ = []
 anp2 _ _ 0 _ = []
 anp2 l z s w 
     | l == [] = replicate (fromIntegral z) (replicate (fromIntegral s) w)
-    | otherwise = take (fromInteger z) [cropOrExtendCols x | x <- l]
-        where 
-            cropOrExtendCols x
-                | length x < (fromIntegral s) = x ++ replicate ((fromIntegral s) - length x) w
-                | otherwise = take (fromIntegral s) x
+    | length l < (fromInteger z) = extend_L
+    | otherwise = crop_L
+        where
+            extend_L = customizedComponentLists ++ requiredListsFilledWithWord
+            crop_L = take (fromInteger z) customizedComponentLists
+            customizedComponentLists = [cropOrExtendCols x | x <- l]
+                where 
+                    cropOrExtendCols x
+                        | length x < (fromIntegral s) = x ++ replicate ((fromIntegral s) - length x) w
+                        | otherwise = take (fromIntegral s) x
+            requiredListsFilledWithWord = (replicate ((fromIntegral z) - (length l)) (replicate (fromIntegral s) w))
 

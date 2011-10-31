@@ -36,9 +36,18 @@ componentListsCroppedOrExtendedToGivenRequirements =
                                     [2, 7],
                                     [8, 1]] (anp2 [[1], [2, 7, 8], [8]] 3 2 1))
 
-rowsCroppedOrExtendedToGivenRequirements = 
+rowsCroppedToGivenRequirements = 
     TestCase (assertEqual "Matrix" [[1, 1],
                                     [2, 7]] (anp2 [[1], [2, 7, 8], [8]] 2 2 1))
+
+rowsExtendedToGivenRequirements = 
+    TestCase (assertEqual "Matrix" [[1, 1],
+                                    [2, 7],
+                                    [1, 1]] (anp2 [[1], [2, 7, 8]] 3 2 1))
+
+funkProgAcceptanceTest1 = TestCase (assertEqual "Matrix" [[0,0,0],[0,0,0]] (anp2 [] 2 3 0))
+funkProgAcceptanceTest2 = TestCase (assertEqual "Matrix" [[1,2,3],[1,2,9],[1,2,3]] (anp2 [[1,2,3],[1,2],[1,2,3,4,5],[1]] 3 3 9))
+funkProgAcceptanceTest3 = TestCase (assertEqual "Matrix" [[1,2,3,(-1)],[4,5,6,(-1)],[(-1),(-1),(-1),(-1)]] (anp2 [[1,2,3],[4,5,6]] 3 4 (-1)))
 
 allTests = 
     TestList [
@@ -76,7 +85,23 @@ allTests =
 
         TestLabel 
         " Rows of component lists are cropped to match given requirements." 
-        rowsCroppedOrExtendedToGivenRequirements
+        rowsCroppedToGivenRequirements,
+
+        TestLabel 
+        " Rows of component lists are extended to match given requirements." 
+        rowsExtendedToGivenRequirements,
+
+        TestLabel 
+        " FunkProg Acceptance Test 1." 
+        funkProgAcceptanceTest1,
+
+        TestLabel 
+        " FunkProg Acceptance Test 2." 
+        funkProgAcceptanceTest2,
+
+        TestLabel 
+        " FunkProg Acceptance Test 3." 
+        funkProgAcceptanceTest3
     ]
 
 main = do runTestTT allTests
