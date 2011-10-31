@@ -1,5 +1,3 @@
-module Main where
-
 import HUnit
 import Aufgabe3
 
@@ -112,5 +110,3 @@ allTests =
         " FunkProg Acceptance Test 3." 
         funkProgAcceptanceTest3
     ]
-
-main = do runTestTT allTests

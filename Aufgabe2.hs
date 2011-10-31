@@ -1,10 +1,12 @@
+module Aufgabe2 ( istPrimal ) where
+
 -- Beispiel 1
 istPrimal :: Integer -> Bool
 istPrimal n
     | notElem n p = False
     | otherwise = hasNoFactors n p
         where 
-            p = [1 + x * 4 | x <- [1..n]]
+            p = [1 + x * 4 | x <- [1..(n `div` 4)]]
             hasNoFactors n p = (secondFactorForLastIn p) `notElem` p
             secondFactorForLastIn [] = -1
             secondFactorForLastIn p@(x:xs)
