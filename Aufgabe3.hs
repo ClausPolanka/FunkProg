@@ -15,8 +15,11 @@ anp1 compLists = [x ++ replicate (maxLength - length x) 0 | x <- compLists]
 anp2 :: [[Integer]] -> Zeilen -> Spalten -> Fuellwert -> Matrix
 anp2 _ 0 _ _ = []
 anp2 _ _ 0 _ = []
-anp2 l z s w
+anp2 l z s w 
     | l == [] = replicate (fromIntegral z) (replicate (fromIntegral s) w)
-    | length l == fromIntegral z && 
-      length l == length [x | x <- l, length x == fromIntegral s] = l
-    | otherwise = [[]]
+    | otherwise = take (fromInteger z) [cropOrExtendCols x | x <- l]
+        where 
+            cropOrExtendCols x
+                | length x < (fromIntegral s) = x ++ replicate ((fromIntegral s) - length x) w
+                | otherwise = take (fromIntegral s) x
+

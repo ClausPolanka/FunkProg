@@ -26,6 +26,20 @@ matrix = [[1, 3, 4],
 componentListsMatchesExactlyRequirements = 
     TestCase (assertEqual "Matrix" matrix (anp2 matrix 3 3 1))
 
+componentListsCroppedToGivenNrOfColumns = 
+    TestCase (assertEqual "Matrix" [[1, 3],
+                                    [2, 7],
+                                    [8, 10]] (anp2 matrix 3 2 1))
+
+componentListsCroppedOrExtendedToGivenRequirements = 
+    TestCase (assertEqual "Matrix" [[1, 1],
+                                    [2, 7],
+                                    [8, 1]] (anp2 [[1], [2, 7, 8], [8]] 3 2 1))
+
+rowsCroppedOrExtendedToGivenRequirements = 
+    TestCase (assertEqual "Matrix" [[1, 1],
+                                    [2, 7]] (anp2 [[1], [2, 7, 8], [8]] 2 2 1))
+
 allTests = 
     TestList [
         TestLabel 
@@ -50,7 +64,19 @@ allTests =
 
         TestLabel 
         " Component lists matches exactly given requirements." 
-        componentListsMatchesExactlyRequirements
+        componentListsMatchesExactlyRequirements,
+
+        TestLabel 
+        " Component lists which have more columns than required are cropped." 
+        componentListsCroppedToGivenNrOfColumns,
+
+        TestLabel 
+        " Component lists which are cropped or extended to match given requirements." 
+        componentListsCroppedOrExtendedToGivenRequirements,
+
+        TestLabel 
+        " Rows of component lists are cropped to match given requirements." 
+        rowsCroppedOrExtendedToGivenRequirements
     ]
 
 main = do runTestTT allTests
