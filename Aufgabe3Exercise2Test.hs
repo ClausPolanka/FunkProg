@@ -45,9 +45,18 @@ rowsExtendedToGivenRequirements =
                                     [2, 7],
                                     [1, 1]] (anp2 [[1], [2, 7, 8]] 3 2 1))
 
-funkProgAcceptanceTest1 = TestCase (assertEqual "Matrix" [[0,0,0],[0,0,0]] (anp2 [] 2 3 0))
-funkProgAcceptanceTest2 = TestCase (assertEqual "Matrix" [[1,2,3],[1,2,9],[1,2,3]] (anp2 [[1,2,3],[1,2],[1,2,3,4,5],[1]] 3 3 9))
-funkProgAcceptanceTest3 = TestCase (assertEqual "Matrix" [[1,2,3,(-1)],[4,5,6,(-1)],[(-1),(-1),(-1),(-1)]] (anp2 [[1,2,3],[4,5,6]] 3 4 (-1)))
+funkProgAcceptanceTest1 = 
+    TestCase (assertEqual "Matrix" [[0,0,0],[0,0,0]] (anp2 [] 2 3 0))
+
+funkProgAcceptanceTest2 = 
+    TestCase (assertEqual "Matrix" [[1, 2, 3], 
+                                    [1, 2, 9], 
+                                    [1, 2, 3]] (anp2 [[1, 2, 3], [1, 2], [1, 2, 3, 4, 5], [1]] 3 3 9))
+
+funkProgAcceptanceTest3 = 
+    TestCase (assertEqual "Matrix" [[1, 2, 3, (-1)], 
+                                    [4, 5, 6, (-1)], 
+                                    [(-1), (-1), (-1), (-1)]] (anp2 [[1, 2, 3], [4, 5, 6]] 3 4 (-1)))
 
 allTests = 
     TestList [
