@@ -1,7 +1,14 @@
-module Main where
+module Aufgabe3Exercise4Test where
 
 import HUnit
 import Aufgabe3
+import Control.OldException
+
+errorMessageForNegativeVectorLength = TestCase $ do
+  handleJust errorCalls (\_ -> return ()) performCall where
+    performCall = do
+      evaluate ( sp [[]] [[]] (-1) 5 )
+      assertFailure "unzulaessig"
 
 funkProgAcceptanceTest1 = 
     TestCase (assertEqual "Skalarprodukt" 9 (sp [[1, 2, 3]] [[4, 5, 6]] 3 1))
@@ -24,6 +31,10 @@ funkProgAcceptanceTest6 =
 
 allTests = 
     TestList [
+        TestLabel
+        " For negative vector length an error message must be shown."
+        errorMessageForNegativeVectorLength,
+
         TestLabel 
         " FunkProg Acceptance Test 1." 
         funkProgAcceptanceTest1,

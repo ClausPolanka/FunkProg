@@ -1,5 +1,20 @@
+module Aufgabe3Exercise2Test where
+
 import HUnit
 import Aufgabe3
+import Control.OldException
+
+errorMessageForNegativeRowLength = TestCase $ do
+  handleJust errorCalls (\_ -> return ()) performCall where
+    performCall = do
+      evaluate ( anp2 [] (-1) 1 0 )
+      assertFailure "unzulaessig"
+
+errorMessageForNegativeColumnLength = TestCase $ do
+  handleJust errorCalls (\_ -> return ()) performCall where
+    performCall = do
+      evaluate ( anp2 [] 1 (-1) 0 )
+      assertFailure "unzulaessig"
 
 emptyListWith2RowsAnd3ColumnsFilledUpWithZeros = 
     TestCase (assertEqual "Matrix" [[0, 0, 0], 
@@ -59,6 +74,14 @@ funkProgAcceptanceTest3 =
 allTests = 
     TestList [
         TestLabel 
+        " For a negative row length an error message must be shown." 
+        errorMessageForNegativeRowLength,
+
+        TestLabel 
+        " For a negative column length an error message must be shown." 
+        errorMessageForNegativeColumnLength,
+
+        TestLabel 
         " Empty list with 2 rows and 3 columns filled up with zeros." 
         emptyListWith2RowsAnd3ColumnsFilledUpWithZeros,
 
@@ -110,3 +133,5 @@ allTests =
         " FunkProg Acceptance Test 3." 
         funkProgAcceptanceTest3
     ]
+
+main = do runTestTT allTests

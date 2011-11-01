@@ -18,6 +18,7 @@ anp2 :: [[Integer]] -> Zeilen -> Spalten -> Fuellwert -> Matrix
 anp2 _ 0 _ _ = []
 anp2 _ _ 0 _ = []
 anp2 l z s w 
+    | z < 0 || s < 0 = error "unzulaessig"
     | l == [] = replicate (fromIntegral z) componentListTemplate
     | length l < (fromInteger z) = extended_L
     | otherwise = cropped_L
@@ -35,6 +36,7 @@ anp2 l z s w
 -- Beispiel 3
 transp :: [[Integer]] -> Zeilen -> Spalten -> Fuellwert -> Matrix
 transp l z s w
+    | z < 0 || s < 0 = error "unzulaessig"
     | l == [] = anp2 l s z w
     | otherwise = anp2 (buildTransponierteMatrixWithIndex 0) s z w
         where buildTransponierteMatrixWithIndex i
@@ -43,7 +45,9 @@ transp l z s w
 
 -- Beispiel 4
 sp :: [[Integer]] -> [[Integer]] -> Laenge -> Fuellwert -> Integer
-sp l1 l2 vl w = sum [(rowVector !! element) * (columnVector !! element) | element <- [0..(fromIntegral vl)-1]]
-    where 
-        rowVector = [x | x <- (anp2 l1 1 vl w) !! 0]
-        columnVector = [ y !! 0 | y <- (anp2 l2 vl 1 w)]
+sp l1 l2 vl w
+    | vl < 0 = error "unzulaessig"
+    | otherwise = sum [(rowVector !! element) * (columnVector !! element) | element <- [0..(fromIntegral vl)-1]]
+        where 
+            rowVector = [x | x <- (anp2 l1 1 vl w) !! 0]
+            columnVector = [ y !! 0 | y <- (anp2 l2 vl 1 w)]

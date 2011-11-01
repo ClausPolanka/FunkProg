@@ -1,5 +1,20 @@
+module Aufgabe3Exercise3Test where
+
 import HUnit
 import Aufgabe3
+import Control.OldException
+
+errorMessageForNegativeRowLength = TestCase $ do
+  handleJust errorCalls (\_ -> return ()) performCall where
+    performCall = do
+      evaluate ( transp [[1]] (-1) 5 5 )
+      assertFailure "unzulaessig"
+
+errorMessageForNegativeColumnLength = TestCase $ do
+  handleJust errorCalls (\_ -> return ()) performCall where
+    performCall = do
+      evaluate ( transp [[1]] 5 (-1) 5 )
+      assertFailure "unzulaessig"
 
 funkProgAcceptanceTest1 = 
     TestCase (assertEqual "Transponierte Matrix" [[0, 0], 
@@ -23,6 +38,14 @@ funkProgAcceptanceTest3 =
 allTests = 
     TestList [
         TestLabel 
+        " For a negative row length an error message must be shown." 
+        errorMessageForNegativeRowLength,
+
+        TestLabel 
+        " For a negative column length an error message must be shown." 
+        errorMessageForNegativeColumnLength,
+
+        TestLabel 
         " FunkProg Acceptance Test 1." 
         funkProgAcceptanceTest1,
 
@@ -34,3 +57,5 @@ allTests =
         " FunkProg Acceptance Test 3." 
         funkProgAcceptanceTest3
     ]
+
+main = do runTestTT allTests
