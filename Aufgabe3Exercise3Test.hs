@@ -1,5 +1,3 @@
-module Main where
-
 import HUnit
 import Aufgabe3
 
@@ -26,7 +24,7 @@ allTests =
     TestList [
         TestLabel 
         " FunkProg Acceptance Test 1." 
-        funkProgAcceptanceTest2,
+        funkProgAcceptanceTest1,
 
         TestLabel 
         " FunkProg Acceptance Test 2." 
@@ -36,5 +34,3 @@ allTests =
         " FunkProg Acceptance Test 3." 
         funkProgAcceptanceTest3
     ]
-
-main = do runTestTT allTests

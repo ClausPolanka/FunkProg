@@ -1,9 +1,10 @@
-module Aufgabe3 ( anp1, anp2, transp ) where
+module Aufgabe3 ( anp1, anp2, transp, sp ) where
 
 type Matrix = [[Integer]]
 type Zeilen = Integer
 type Spalten = Integer
 type Fuellwert = Integer
+type Laenge = Integer
 
 
 -- Beispiel 1
@@ -39,3 +40,10 @@ transp l z s w
         where buildTransponierteMatrixWithIndex i
                 | i < (fromIntegral z) = [x !! i | x <- (anp2 l z s w)] : buildTransponierteMatrixWithIndex (i + 1)
                 | otherwise = []
+
+-- Beispiel 4
+sp :: [[Integer]] -> [[Integer]] -> Laenge -> Fuellwert -> Integer
+sp l1 l2 vl w = sum [(rowVector !! element) * (columnVector !! element) | element <- [0..(fromIntegral vl)-1]]
+    where 
+        rowVector = [x | x <- (anp2 l1 1 vl w) !! 0]
+        columnVector = [ y !! 0 | y <- (anp2 l2 vl 1 w)]
