@@ -6,7 +6,6 @@ type Spalten = Integer
 type Fuellwert = Integer
 type Laenge = Integer
 
-
 -- Beispiel 1
 anp1 :: [[Integer]] -> Matrix
 anp1 [] = [[1]]
