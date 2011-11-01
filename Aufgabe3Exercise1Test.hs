@@ -6,6 +6,9 @@ import Aufgabe3
 emptyList = 
     TestCase (assertEqual "Matrix" [[1]] (anp1 []))
 
+emptyComponentLists =
+    TestCase (assertEqual "Matrix" [[], [], []] (anp1 [[], [], []]))
+
 oneComponentListWithTwoElements = 
     TestCase (assertEqual "Matrix" [[5, 7]] (anp1 [[5, 7]]))
 
@@ -22,13 +25,17 @@ funkProgAcceptanceTest1 =
                                     [1, 0, 0, 0, 0]] (anp1 [[1, 2, 3], [1, 2], [1, 2, 3, 4, 5], [1]]))
 
 funkProgAcceptanceTest2 = 
-    TestCase (assertEqual "Matrix" [[1,2,3],[4,5,6]] (anp1 [[1,2,3],[4,5,6]]))
+    TestCase (assertEqual "Matrix" [[1, 2, 3], [4, 5, 6]] (anp1 [[1, 2, 3], [4, 5, 6]]))
 
 allTests = 
     TestList [
         TestLabel 
         " For an empty list a component list containing 1 must be returned." 
         emptyList,
+
+        TestLabel 
+        " For an empty list containing empty component lists return exactly the same as Matrix." 
+        emptyComponentLists,
 
         TestLabel 
         " For 1 component list return the same component list." 
