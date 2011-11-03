@@ -3,22 +3,18 @@ module Aufgabe2 ( istPrimal ) where
 -- Beispiel 1
 istPrimal :: Integer -> Bool
 istPrimal n
-    | notElem n p = False
-    | otherwise = hasNoFactors n p
+    | n < 1 = False
+    | otherwise = hasNoFactors n
         where 
-            p = [1 + x * 4 | x <- [1..(n `div` 4)]]
-            hasNoFactors n p = (secondFactorForLastIn p) `notElem` p
-            secondFactorForLastIn [] = -1
-            secondFactorForLastIn p@(x:xs)
-                | (last p) `mod` x == 0 = (last p) `div` x
-                | otherwise = secondFactorForLastIn xs
+            p = [1 + x * 4 | x <- [0..n]]
+            hasNoFactors n = length [x * y | x <- factors, y <- factors, x * y == n] > 0
+            factors = [1 + n * 4 `div` x | x <- p, 1 + n * 4 `mod` x == 0]
 
 -- Beispiel 2
-faktorisiere :: Integer -> [(Integer,Integer)]
+faktorisiere :: Integer -> [(Integer, Integer)]
 faktorisiere x
     | istPrimal x = []
-    | otherwise = [(x,x)]
-
+    | otherwise = [(x, x)]
 
 -- Beispiel 3
 type Editor = String
