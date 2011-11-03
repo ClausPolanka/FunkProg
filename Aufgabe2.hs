@@ -1,20 +1,26 @@
-module Aufgabe2 ( istPrimal ) where
+module Aufgabe2 ( istPrimal, faktorisiere ) where
 
 -- Beispiel 1
 istPrimal :: Integer -> Bool
 istPrimal n
-    | n < 1 = False
-    | otherwise = hasNoFactors n
-        where 
-            p = [1 + x * 4 | x <- [0..n]]
-            hasNoFactors n = length [x * y | x <- factors, y <- factors, x * y == n] > 0
-            factors = [1 + n * 4 `div` x | x <- p, 1 + n * 4 `mod` x == 0]
+    | n `notElem` (p n) = False
+    | otherwise = length (factorPairsFor n) == 0
+
+p :: Integer -> [Integer]
+p n = [1 + x * 4 | x <- [0..n]]
+
+factorPairsFor :: Integer -> [(Integer, Integer)]            
+factorPairsFor n = [(x, y) | x <- factorsFor n, y <- factorsFor n, x * y == n]
+
+factorsFor :: Integer -> [Integer]
+factorsFor n = [x | x <- (p n), n `mod` x == 0]
 
 -- Beispiel 2
 faktorisiere :: Integer -> [(Integer, Integer)]
-faktorisiere x
-    | istPrimal x = []
-    | otherwise = [(x, x)]
+faktorisiere n
+    | istPrimal n = []
+    | n `notElem` (p n) = error "Unzulaessig"
+    | otherwise = factorPairsFor n
 
 -- Beispiel 3
 type Editor = String
