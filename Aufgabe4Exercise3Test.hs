@@ -1,4 +1,4 @@
-module Aufgabe4Exercise4Test where
+module Aufgabe4Exercise3Test where
 
 import HUnit
 import Aufgabe4

@@ -46,4 +46,21 @@ ms p1 p2 (z, s, w) = [zipWith (+) (m1 !! x) (m2 !! x) | x <- [0..(length m1 - 1)
 
 -- Beispiel 4
 mp :: ProtoprotoMatrix -> Typung_mw -> Potenz -> Matrix
-mp p (sz, w) n = []
+mp p (sz, w) n
+    | n == 0 = einheitsMatrix (fromIntegral sz)
+    | otherwise = powerOf m m (sz, w) (n)
+        where 
+            m = anp2 p sz sz w
+
+einheitsMatrix :: Int -> Matrix
+einheitsMatrix sz = [insertOneInto (zeroMatrix !! i) (fromIntegral i) | i <- [0..(sz - 1)]]
+    where 
+        zeroMatrix = replicate sz (replicate sz 0)
+        insertOneInto (x:xs) index
+            | index == 0 = 1:xs
+            | otherwise = x:insertOneInto xs (index-1)
+
+powerOf m m_orig (sz, w) n
+    | n == 1 = m
+    | n > 0 = powerOf (mm m m_orig (sz, sz, sz, w)) m_orig (sz, w) (n-1)
+    | otherwise = m
