@@ -39,7 +39,10 @@ productOfAllColumnVectorsWith rowVector m2 = [productOf rowVector columnVector |
 
 -- Beispiel 3
 ms :: ProtoprotoMatrix -> ProtoprotoMatrix -> Typung_mnw -> Matrix
-ms p1 p2 (z, s, w) = []
+ms p1 p2 (z, s, w) = [zipWith (+) (m1 !! x) (m2 !! x) | x <- [0..(length m1 - 1)]]
+    where
+        m1 = anp2 p1 z s w
+        m2 = anp2 p2 z s w
 
 -- Beispiel 4
 mp :: ProtoprotoMatrix -> Typung_mw -> Potenz -> Matrix
