@@ -2,6 +2,9 @@ module Aufgabe5 where
 
 -- Beispiel 1
 
+ctxlines :: [String]
+ctxlines = ["Test", "Test", "Test\nTest\nTest"]
+
 -- Beispiel 2
 
 unixtac :: String -> String
