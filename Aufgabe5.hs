@@ -5,6 +5,12 @@ module Aufgabe5 where
 ctxlines :: [String]
 ctxlines = ["Test", "Test", "Test\nTest\nTest"]
 
+ctxunlines :: [[String]]
+ctxunlines = [["Test1\nT"], ["Test2\nT"], ["Test3\nT"], ["T\nT"]]
+
+ctxwords :: [String]
+ctxwords = ["Test2 Test3  T", "T  Test1 Test2 Test3", "Test1  T Test2 Test3"]
+
 -- Beispiel 2
 
 unixtac :: String -> String
