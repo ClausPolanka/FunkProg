@@ -64,10 +64,11 @@ unixgrep' s1 s2 = s1
 -- Beispiel 4
 
 unixrev :: String -> String
-unixrev s = s
+unixrev s = withoutLastNewLine . unlines $ map reverse $ lines s
 
 wordrev :: String -> String
-wordrev s = s
+wordrev s = withoutLastNewLine . unlines $ [reverseWordsOf line | line <- lines s]
+    where reverseWordsOf = unwords . reverse . words
 
 -- Beispiel 5
 
