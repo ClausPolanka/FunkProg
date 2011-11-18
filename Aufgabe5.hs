@@ -1,5 +1,7 @@
 module Aufgabe5 where
 
+import Data.List 
+
 -- Beispiel 1
 
 ctxlines :: [String]
@@ -31,7 +33,16 @@ unixtail n text = withoutLastNewLine nLines
         linesAsList = lines text
 
 unixgrep :: String -> String -> String
-unixgrep s1 s2 = s1
+unixgrep searchString text = withoutLastNewLine linesContainingString
+    where 
+        linesContainingString = unlines [line | line <- (lines text), 
+                                                line `contains` searchString]
+
+contains :: String -> String -> Bool
+contains [] _ = False
+contains sentence@(x:xs) word
+    | word `isPrefixOf` sentence = True
+    | otherwise = contains xs word
 
 -- Beispiel 3
 
