@@ -14,13 +14,21 @@ ctxwords = ["Test2 Test3  T", "T  Test1 Test2 Test3", "Test1  T Test2 Test3"]
 -- Beispiel 2
 
 unixtac :: String -> String
-unixtac = (unlines . reverse . lines)
+unixtac s = withoutLastNewLine text
+	where text = unlines . reverse . lines $ s
+
+withoutLastNewLine :: String -> String
+withoutLastNewLine s = take (length s - 1) s 
 
 unixhead :: Int -> String -> String
-unixhead = take
+unixhead n text = withoutLastNewLine nLines
+	where nLines = unlines . take n  $ lines text
 
 unixtail :: Int -> String -> String
-unixtail n s = s
+unixtail n text = withoutLastNewLine nLines
+	where 
+		nLines = unlines . drop (length linesAsList - n) $ linesAsList
+		linesAsList = lines text
 
 unixgrep :: String -> String -> String
 unixgrep s1 s2 = s1
