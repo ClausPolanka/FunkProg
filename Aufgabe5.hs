@@ -73,8 +73,7 @@ wordrev s = withoutLastNewLine . unlines $ [reverseWordsOf line | line <- lines 
 -- Beispiel 5
 
 unixwcw :: String -> Int
-unixwcw s = 1
+unixwcw text = length . words $ text
 
 unixwc :: String -> (Int, Int, Int)
-unixwc s = (1, 1, 1)
-
+unixwc s = (length . lines $ s, unixwcw s, sum $ map length $ lines s)
