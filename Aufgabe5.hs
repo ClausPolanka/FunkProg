@@ -47,19 +47,19 @@ contains sentence@(x:xs) word
 -- Beispiel 3
 
 aslines :: ([String]->[String]) -> String -> String
-aslines f s = s
+aslines f s = withoutLastNewLine . unlines . f . lines $ s
 
 unixtac' :: String -> String
-unixtac' s = s
+unixtac' = aslines reverse
 
 unixhead' :: Int -> String -> String
-unixhead' n s = s
+unixhead' n s = aslines (take n) s
 
 unixtail' :: Int -> String -> String
-unixtail' n s = s
+unixtail' n s = aslines (drop (length (lines s) - n)) s
 
 unixgrep' :: String -> String -> String
-unixgrep' s1 s2 = s1
+unixgrep' = unixgrep
 
 -- Beispiel 4
 
