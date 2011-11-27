@@ -45,7 +45,12 @@ mkControl :: String -> Control
 mkControl s = [x | x <- s, x == 'l' || x == 'm' || x == 'r']
 
 apply :: Control -> Data -> Tree -> Integer
-apply c d t = 1
+apply c d (Leaf f) = f d
+apply [] d (Node f t1 t2 t3) = f d
+apply c d (Node f t1 t2 t3)
+    | (head $ mkControl c) == 'l' = apply (drop 1 c) (f d) t1 
+    | (head $ mkControl c) == 'm' = apply (drop 1 c) (f d) t2
+    | (head $ mkControl c) == 'r' = apply (drop 1 c) (f d) t3
 
 -- Beispiel 4
 data LTree = LNode Integer [LTree] deriving Show
