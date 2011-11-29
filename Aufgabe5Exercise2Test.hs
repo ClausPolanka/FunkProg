@@ -18,6 +18,14 @@ unixgrepLinesContainingSearchString =
 findInSentence =
     TestCase (assertEqual "Found" True (contains "Polanka" "an"))
 
+funkProgErrorAT =
+    TestCase (assertEqual "Last n lines" True 
+        ((lines.unixtail 2.unlines)["3"|_<-[1..100000]] == ["3","3"]))
+
+funkProgErrorAT2 = 
+    TestCase (assertEqual "Lines" True 
+        ([(lines.unixgrep s.unlines) ["a", "abd", "abcx", "aabcx", ""] | s <- ["abc", "bc", ""]] == 
+            [["abcx", "aabcx"], ["abcx", "aabcx"], ["a", "abd", "abcx", "aabcx", ""]]))
 
 allTests = 
     TestList [
@@ -39,7 +47,15 @@ allTests =
 
         TestLabel
         " Line containing 'ol' must be shown."
-        unixgrepLinesContainingSearchString
+        unixgrepLinesContainingSearchString,
+
+        --TestLabel
+        --" ERROR - Garbage collection fails to reclaim sufficient space."
+        --funkProgErrorAT,
+
+        TestLabel
+        " Error in FunkProg AT."
+        funkProgErrorAT2
     ]
 
 main = do runTestTT allTests

@@ -33,6 +33,8 @@ unixtail n text = withoutLastNewLine nLines
         linesAsList = lines text
 
 unixgrep :: String -> String -> String
+unixgrep searchString text
+    | searchString == "" = text
 unixgrep searchString text = withoutLastNewLine linesContainingString
     where 
         linesContainingString = unlines [line | line <- (lines text), 
