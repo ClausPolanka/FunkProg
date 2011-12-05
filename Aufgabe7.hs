@@ -11,10 +11,10 @@ data LTree a = LNode Key a [(LTree a)] deriving Show
 data ALgraph = ALg [(Origin, [Destination])] deriving (Eq,Show)
 
 class Structure s where
-	noOfSources :: s -> Integer
-	noOfSinks :: s -> Integer
-	notSourceConnected :: s -> [Name]
-	notSinkConnected :: s -> [Name]
+    noOfSources :: s -> Integer
+    noOfSinks :: s -> Integer
+    notSourceConnected :: s -> [Name]
+    notSinkConnected :: s -> [Name]
 
 -- Teil 2
 
